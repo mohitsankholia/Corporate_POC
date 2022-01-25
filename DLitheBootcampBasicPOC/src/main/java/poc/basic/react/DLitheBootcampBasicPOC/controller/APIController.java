@@ -21,11 +21,6 @@ public class APIController {
 	@Autowired
 	CorporateServices service;
 	
-	@GetMapping("/")
-	public String xyz() {
-		return "im alive";
-	}
-	
 	// /rest/new
 	// infosys has successfully inserted
 	@PostMapping("/new")
