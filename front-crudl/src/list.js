@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import Create from "./create";
 import info, { getting } from './DataAccess'
@@ -6,6 +6,7 @@ import Read from "./read";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import EditIcon from '@mui/icons-material/Edit';
 import Edit from "./edit";
+import { traverse } from "./api";
 
 
 
@@ -14,6 +15,18 @@ const List=()=>{
     const [rview,setRview]=useState(false)
     const [eview,setEview]=useState(false)
     const [pos,setPos]=useState(0)
+
+    const[all, setAll]= useState([])
+
+    useEffect(()=>{
+        iterate()
+    },[])
+
+    const iterate=async()=>{
+        const t= await traverse()
+        setAll(t.data) 
+    }
+
     const [obj,setObj]=useState(
         {
             "org":"",
@@ -76,7 +89,7 @@ const List=()=>{
                             </tr>
                         </thead>
                         <tbody>
-                            {info.map((data,index)=>(
+                            {all.map((data,index)=>(
                                 <tr>
                                     <td onClick={
                                         ()=>{
@@ -86,16 +99,26 @@ const List=()=>{
                                         }}>
                                         {data.org}
                                     </td>
-                                    <td>{data.locations}</td>
-                                    {/* <td>
+                                    {/* <td>{data.locations}</td> */}
+                                    { <td>
                                         {data.locations.map((ele)=>(
                                             <p>{ele}</p>
                                         ))}
-                                    </td> */}
+                                    </td> }
                                     <td>{data.employees}</td>
                                     <td>{data.basic}</td>
-                                    <td>{data.services}</td>
-                                    <td>{data.benchmarks}</td>
+                                    {/* <td>{data.services}</td> */}
+                                    { <td>
+                                        {data.services.map((ele)=>(
+                                            <p>{ele}</p>
+                                        ))}
+                                    </td> }
+                                    {/* <td>{data.benchmarks}</td> */}
+                                    { <td>
+                                        {data.benchmarks.map((ele)=>(
+                                            <p>{ele}</p>
+                                        ))}
+                                    </td> }
                                     <td>
                                         <button className="btn btn-outline-danger">
                                             <RemoveCircleIcon/>

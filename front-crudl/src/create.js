@@ -6,7 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RotateLeftIcon from '@mui/icons-material/RotateLeft';
-import { abc, append } from "./api";
+import {append } from "./api";
 // import { putting } from "./DataAccess";
 
 const Create=()=>{
@@ -40,7 +40,7 @@ const Create=()=>{
         data.benchmarks=data.benchmarks.split(',')
 
         alert(JSON.stringify(data));
-        alert(await (await abc()).data)
+        // alert(await (await abc()).data)
         //putting(data)
         const yet =await append(data) //data from corporate
         alert(yet.data) // yet.data reponse from backend which is recieved by yet variable(keywordin axios)

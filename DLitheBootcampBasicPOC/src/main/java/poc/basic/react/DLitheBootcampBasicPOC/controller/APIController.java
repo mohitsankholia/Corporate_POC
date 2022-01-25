@@ -1,5 +1,7 @@
 package poc.basic.react.DLitheBootcampBasicPOC.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +29,12 @@ public class APIController {
 	public String happy(@RequestBody Corporate corp) {
 		
 		return service.addingNewOne(corp).getOrg()+ "has successfully inserted";
+	}
+	
+	@GetMapping("/")
+	public List<Corporate> hogan(){
 		
+		return service.readEverything(); 
 	}
 
 }
