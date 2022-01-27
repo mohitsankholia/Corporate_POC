@@ -15,4 +15,14 @@ const append=async(obj)=>{
    return ack
 }
 
-export {append, traverse}
+const oneAtTime=async(param)=>{
+   const tmp= await axios.get(`${url}/${param}`)
+   return tmp 
+}
+
+const terminate=async(param)=>{
+   const t= await axios.delete(`${url}/remove/${param}`)
+   return t
+}
+
+export {append, traverse, oneAtTime, terminate}

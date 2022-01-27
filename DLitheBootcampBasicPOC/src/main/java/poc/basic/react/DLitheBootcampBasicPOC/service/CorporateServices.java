@@ -22,4 +22,15 @@ public class CorporateServices {
 	public List<Corporate> readEverything(){
 		return repo.findAll();
 	}
+	
+	public Corporate readOne(String id)
+	{
+		return repo.findById(id).orElse(new Corporate());
+	}
+	
+	public String eraseOne(String id) {
+		String name=readOne(id).getOrg()+" "+readOne(id).getBasic()+" has deleted\n";
+		repo.deleteById(id);
+		return name;
+	}
 }

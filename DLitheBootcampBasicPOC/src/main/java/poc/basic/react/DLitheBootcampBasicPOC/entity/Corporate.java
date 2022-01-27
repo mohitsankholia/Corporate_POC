@@ -1,4 +1,5 @@
 package poc.basic.react.DLitheBootcampBasicPOC.entity;
+import java.io.Serializable;
 import java.util.ArrayList;
 import  java.util.List;
 
@@ -7,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity 
-public class Corporate {
+public class Corporate implements Serializable {
 	// org, loactions, services, benchmarks, employees, basic
 	
 	@Id
