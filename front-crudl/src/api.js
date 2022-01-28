@@ -25,4 +25,8 @@ const terminate=async(param)=>{
    return t
 }
 
-export {append, traverse, oneAtTime, terminate}
+const change=async(object)=>{
+   const t= await axios.put(`${url}/up`, object)
+   return t
+}
+export {append, traverse, oneAtTime, terminate, change}

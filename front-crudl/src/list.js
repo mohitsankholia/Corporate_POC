@@ -15,7 +15,8 @@ const List=()=>{
     const [cview,setCview]=useState(false)
     const [rview,setRview]=useState(false)
     const [eview,setEview]=useState(false)
-    const [pos,setPos]=useState(0)
+    const [company,setCompany]=useState("")
+    // const [pos,setPos]=useState(0)
 
     const[all, setAll]= useState([])
 
@@ -75,7 +76,8 @@ const List=()=>{
             :
             (eview)?
             <>
-                <Edit corp={obj} order={pos}/>
+                {/* <Edit corp={obj} order={pos}/> */}
+                <Edit id={company}/>
                 <button className="btn btn-outline-dark" 
                 onClick={()=>setEview(false)}>
                     Back
@@ -146,9 +148,10 @@ const List=()=>{
                                         <button className="btn btn-outline-warning"onClick={
                                             ()=>{
                                                 setEview(true)
-                                                const tmp=getting(data.org)
-                                                setPos(index)
-                                                setObj(tmp)
+                                                // const tmp=getting(data.org)
+                                                // setPos(index)
+                                                // setObj(tmp)
+                                                setCompany(data.org)
                                             }
                                         }>
                                             <EditIcon/>

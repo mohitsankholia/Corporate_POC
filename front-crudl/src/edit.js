@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -7,20 +7,34 @@ import Button from '@mui/material/Button';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { update } from "./DataAccess";
+import { change, oneAtTime } from "./api";
 
 
 const Edit=(kalpana)=>{
     const [pos,setPos]=useState(kalpana.order)
     const [data,setDate]=useState(
         {
-            "org":kalpana.corp.org,
-            "locations":kalpana.corp.locations,
-            "employees":kalpana.corp.employees,
-            "basic":kalpana.corp.basic,
-            "services":kalpana.corp.services,
-            "benchmarks":kalpana.corp.benchmarks
+            "org":"",
+            "locations":[],
+            "employees":0,
+            "basic":0.0,
+            "services":[],
+            "benchmarks":[]
         }
     )
+
+    useEffect(()=>{
+        finding()
+    },[])
+
+    const finding=async()=>{
+        const obj=await oneAtTime(kalpana.id)
+        const tmp=obj.data
+        tmp.locations=String(tmp.locations)
+        tmp.services=String(tmp.services)
+        tmp.benchmarks=String(tmp.benchmarks)
+        setDate(tmp)
+    }
 
     const perform=(eve)=>{
         // extraction
@@ -31,6 +45,15 @@ const Edit=(kalpana)=>{
                 [name]:value
             }
         })
+    }
+
+    const modify=async()=>{
+        data.locations=data.locations.split(',')
+        data.services=data.services.split(',')
+        data.benchmarks=data.benchmarks.split(',')
+        const tmp=await change(data)
+        alert(tmp.data)
+        window.location.assign("http://localhost:3000")
     }
 
     return(
@@ -94,8 +117,9 @@ const Edit=(kalpana)=>{
                         <div className="row justify-content-around">
                             <Button variant="outlined" color="primary" className="col-4" 
                             onClick={()=>{
-                                alert(JSON.stringify(data)+" "+pos)
-                                update(data,pos)
+                                // alert(JSON.stringify(data)+" "+pos)
+                                // update(data,pos)
+                                modify()
                             }}>
                                 <UpgradeIcon/>
                             </Button>

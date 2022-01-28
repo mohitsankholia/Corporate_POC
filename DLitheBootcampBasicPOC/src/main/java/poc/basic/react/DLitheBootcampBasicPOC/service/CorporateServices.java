@@ -14,7 +14,7 @@ public class CorporateServices {
 	@Autowired //get the instance/memory of the component
 	CorporateRepository repo;
 	
-	public Corporate addingNewOne(Corporate object) {
+	public Corporate interact(Corporate object) {
 		return repo.save(object); // pass the entity object that can be converted as record in the table
 		
 	}
