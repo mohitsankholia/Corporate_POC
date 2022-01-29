@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const url="http://localhost:8081/DLitheBootcampBasicPOC/rest"
+// const url="http://localhost:8081/DLitheBootcampBasicPOC/rest"
+const url="http://localhost:8080/DLitheBootcampBasicPOC-0.0.1-SNAPSHOT/rest"
 
 
 //axios.mthod(url,object)
